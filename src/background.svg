@@ -1,0 +1,15 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect y="-3.05176e-05" width="1440" height="900" fill="#546280"/>
+<g style="mix-blend-mode:color-burn" opacity="0.9">
+<path d="M782 0H1440V503H1285C1282.21 503 1280.82 503 1279.64 502.994C1005.34 501.702 783.298 279.657 782.006 5.3562C782 4.17811 782 2.78541 782 0V0Z" fill="#7AC7C4" fill-opacity="0.7"/>
+</g>
+<g style="mix-blend-mode:color-burn" opacity="0.9">
+<path d="M658 900L7.84397e-05 900L7.84397e-05 397L155 397C157.785 397 159.178 397 160.356 397.006C434.657 398.298 656.702 620.343 657.994 894.644C658 895.822 658 897.215 658 900V900Z" fill="#C4EDDE" fill-opacity="0.7"/>
+</g>
+<g style="mix-blend-mode:screen">
+<path d="M990 -79.8209L1347.12 -253L1498.28 58.7179L1411.1 100.997C1262.02 173.291 1082.56 111.043 1010.26 -38.0386L990 -79.8209Z" fill="#F73859" fill-opacity="0.75"/>
+</g>
+<g style="mix-blend-mode:lighten" opacity="0.8">
+<rect x="502" y="286" width="515" height="469" rx="118" transform="rotate(-34.5 502 286)" fill="#C4EDDE" fill-opacity="0.3"/>
+</g>
+</svg>
