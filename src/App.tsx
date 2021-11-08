@@ -1,8 +1,9 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { FunctionComponent } from "react";
 
-const Placeholder = () => {
+const Placeholder: FunctionComponent = () => {
   return (
     <div className="App">
       <header className="App-header">
@@ -21,7 +22,7 @@ const Placeholder = () => {
   );
 };
 
-function App() {
+const App: FunctionComponent = () => {
   return (
     <Router>
       <div>
@@ -38,6 +39,6 @@ function App() {
       </div>
     </Router>
   );
-}
+};
 
 export default App;
