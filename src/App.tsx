@@ -11,11 +11,11 @@ const Placeholder: FunctionComponent = () => {
         <p>Witamy w Codegarden. Baw się dobrze.</p>
         <a
           className="App-link"
-          href="https://reactjs.org"
+          href="https://www.python.org/doc/"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Learn Python
         </a>
       </header>
     </div>
