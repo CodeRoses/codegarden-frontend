@@ -45,10 +45,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: node-app
-        
-      - name: add ecosystem.config.js
-        run: |
-          echo 'module.exports = {script: "serve",env: {PM2_SERVE_SPA: 'true',PM2_SERVE_HOMEPAGE: './index.html'}}' >> ./ecosystem.config.js
       
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
