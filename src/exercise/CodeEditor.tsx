@@ -15,13 +15,15 @@ const codeFragments = [
   `for cukierek in kociolek:`,
 ];
 
-const CodeEditor = () => {
-  const dragulaDecorator = React.useRef((componentBackingInstance: any) => {
-    if (componentBackingInstance) {
-      const options = {};
-      Dragula([componentBackingInstance], options);
+const CodeEditor: React.FunctionComponent = () => {
+  const dragulaDecorator = React.useRef(
+    (componentBackingInstance: HTMLDivElement) => {
+      if (componentBackingInstance) {
+        const options = {};
+        Dragula([componentBackingInstance], options);
+      }
     }
-  });
+  );
 
   return (
     <div className="bg-black p-10 bg-opacity-70 rounded-lg">
