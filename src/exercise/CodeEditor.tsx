@@ -26,7 +26,7 @@ const CodeEditor: React.FunctionComponent = () => {
   );
 
   return (
-    <div className="bg-black p-10 bg-opacity-70 rounded-lg">
+    <div className="bg-black p-10 bg-opacity-70 rounded-lg self-center">
       <div className="flex flex-col rounded bg-duotone-dark p-10">
         <Code code={codePrewritten} />
         <div className="container" ref={dragulaDecorator.current}>
@@ -36,8 +36,8 @@ const CodeEditor: React.FunctionComponent = () => {
             </div>
           ))}
         </div>
-        <div className="flex justify-center">
-          <button className="bg-red-500 rounded-2xl text-white p-2">
+        <div className="flex justify-center text-white text-2xl mt-10">
+          <button className="bg-red-400 hover:bg-red-500 rounded-full py-2 px-4">
             Wyślij
           </button>
         </div>
