@@ -36,3 +36,22 @@
     transform: rotate(360deg);
   }
 }
+
+/* DO NOT TOUCH ITS DRAGULA FIXES */
+.gu-mirror.gu-mirror {
+  position: fixed;
+  z-index: 9999;
+  opacity: 0.8;
+}
+
+.gu-hide {
+  display: none;
+}
+
+.gu-unselectable {
+  user-select: none;
+}
+
+.gu-transit {
+  opacity: 0.2;
+}

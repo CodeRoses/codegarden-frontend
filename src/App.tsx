@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { FunctionComponent } from "react";
+import Exercise from "./exercise/Exercise";
 
 const Placeholder: FunctionComponent = () => {
   return (
@@ -30,11 +31,13 @@ const App: FunctionComponent = () => {
           <ul>
             <li>
               <Link to="/">Home</Link>
+              <Link to="/exercise">Exercise</Link>
             </li>
           </ul>
         </nav>
         <Routes>
           <Route path="/" element={<Placeholder />} />
+          <Route path="/exercise" element={<Exercise />} />
         </Routes>
       </div>
     </Router>
