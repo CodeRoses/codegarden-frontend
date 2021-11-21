@@ -24,6 +24,7 @@ const Placeholder: FunctionComponent = () => {
 };
 
 const App: FunctionComponent = () => {
+  document.body.classList.add("overflow-x-hidden");
   return (
     <Router>
       <div>

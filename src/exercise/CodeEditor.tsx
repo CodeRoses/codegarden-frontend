@@ -30,8 +30,8 @@ const CodeEditor: React.FunctionComponent = () => {
       <div className="flex flex-col rounded bg-duotone-dark p-10">
         <Code code={codePrewritten} />
         <div className="container" ref={dragulaDecorator.current}>
-          {codeFragments.map((fragment) => (
-            <div className="border-t border-gray-700">
+          {codeFragments.map((fragment, index) => (
+            <div className="border-t border-gray-700" key={index}>
               <Code code={fragment} />
             </div>
           ))}
