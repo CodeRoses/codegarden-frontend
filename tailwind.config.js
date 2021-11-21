@@ -26,11 +26,6 @@ module.exports = {
         "3/5": "60%",
         "4/5": "80vh",
       },
-      backgroundImage: {
-        "diff-easy": "url('./diff-easy.svg')",
-        "diff-medium": "url('./diff-medium.svg')",
-        "diff-hard": "url('./diff-hard.svg')",
-      },
       borderRadius: {
         "4xl": "2rem",
       },
