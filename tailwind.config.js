@@ -9,11 +9,17 @@ module.exports = {
         "sizzling-red": "#f73859",
         "light-cyan": "#7ac7c4",
         "levis-lush-grey": "#393737",
+        "dim-lilac": "#546280",
       }),
       borderColor: (theme) => ({
         ...theme("colors"),
         DEFAULT: theme("colors.gray.300", "currentColor"),
         "levis-lush-grey": "#393737",
+        "dim-lilac": "#546280",
+      }),
+      textColor: (theme) => ({
+        ...theme("colors"),
+        "dim-lilac": "#546280",
       }),
       inset: {
         "-4": "-1rem",

@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { FunctionComponent } from "react";
 import Exercise from "./exercise/Exercise";
 import ExerciseGrid from "./exerciseGrid/ExerciseGrid";
+import Login from "./authentication/Login";
 
 const Placeholder: FunctionComponent = () => {
   return (
@@ -15,6 +16,7 @@ const Placeholder: FunctionComponent = () => {
           Wybierz zadanie
         </Link>
       </header>
+      <Login />
     </div>
   );
 };
