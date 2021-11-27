@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { FunctionComponent } from "react";
 import Exercise from "./exercise/Exercise";
 import ExerciseGrid from "./exerciseGrid/ExerciseGrid";
-import Login from "./authentication/Login";
+import LoginScreen from "./authentication/LoginScreen";
 
 const Placeholder: FunctionComponent = () => {
   return (
@@ -12,11 +12,10 @@ const Placeholder: FunctionComponent = () => {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>Witamy w Codegarden. Baw się dobrze.</p>
-        <Link className="App-link" to="/exercises">
-          Wybierz zadanie
+        <Link className="App-link" to="/login">
+          Zaloguj się
         </Link>
       </header>
-      <Login />
     </div>
   );
 };
@@ -37,6 +36,7 @@ const App: FunctionComponent = () => {
           <Route path="/" element={<Placeholder />} />
           <Route path="/exercise" element={<Exercise />} />
           <Route path="/exercises" element={<ExerciseGrid />} />
+          <Route path="/login" element={<LoginScreen />} />
         </Routes>
       </div>
     </Router>

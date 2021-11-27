@@ -1,5 +1,4 @@
 import React from "react";
-import { IconContext } from "react-icons";
 import { FaCheck } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { IExercise } from "../types/Exercise";

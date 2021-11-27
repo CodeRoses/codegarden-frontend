@@ -13,7 +13,7 @@ const SeparatorWithText: React.FunctionComponent<TextProp> = ({
 }) => {
   return (
     <div className={`w-full h-5 border-b text-center ${className}`}>
-      <span className={`text-3xl px-3 ${backgroundColor}`}>{textContent}</span>
+      <span className={`text-lg px-3 ${backgroundColor}`}>{textContent}</span>
     </div>
   );
 };
