@@ -44,7 +44,7 @@ const ExerciseTile: React.FunctionComponent<ExerciseProps> = ({ exercise }) => {
         <div
           className={`bg-diff-${
             DIFFICULTIES[exercise.difficulty].color
-          } bg-no-repeat bg-contain -mb-1 mt-auto h-10 flex items-center justify-center`}
+          } bg-no-repeat bg-contain mt-auto h-10 flex items-center justify-center`}
         >
           {DIFFICULTIES[exercise.difficulty].name}
         </div>

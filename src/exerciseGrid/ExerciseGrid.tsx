@@ -76,7 +76,7 @@ const ExerciseGrid: React.FunctionComponent = () => {
     setFilteredExercises(
       exercises.filter(
         (exercise) =>
-          exercise.name.includes(searchPhrase) &&
+          exercise.name.toLowerCase().includes(searchPhrase) &&
           (+difficulty === 0 || exercise.difficulty === +difficulty)
       )
     );
@@ -84,7 +84,7 @@ const ExerciseGrid: React.FunctionComponent = () => {
 
   return (
     <div className="h-screen flex flex-col items-center">
-      <div className="bg-black bg-opacity-50 rounded-lg max-w-6xl">
+      <div className="bg-black bg-opacity-50 rounded-lg min-w-6xl max-w-6xl">
         <div className="bg-gray-300 flex justify-end mb-10 w-full md:w-1/2 rounded-br-3xl">
           <SearchBar
             searchPhrase={searchPhrase}
@@ -95,7 +95,7 @@ const ExerciseGrid: React.FunctionComponent = () => {
             setDifficulty={setDifficulty}
           />
         </div>
-        <div className="grid grid-cols-1 py-5 px-6 md:grid-cols-2 xl:grid-cols-3 gap-10 xl:gap-32 self-center md:w-11/12 m-auto overflow-y-auto overflow-x-visible max-h-4/5">
+        <div className="grid grid-cols-1 py-5 px-6 md:grid-cols-2 xl:grid-cols-3 gap-10 xl:gap-32 self-center md:w-11/12 m-auto overflow-y-auto overflow-x-visible min-h-4/5 max-h-4/5">
           {filteredExercises.map((exercise) => (
             <ExerciseTile key={exercise.id} exercise={exercise} />
           ))}

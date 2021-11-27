@@ -13,7 +13,7 @@ const SearchBar: React.FunctionComponent<SearchProps> = ({
     <input
       className="w-3/5 m-3 rounded-lg p-2"
       type="text"
-      onChange={(e) => setSearchPhrase(e.currentTarget.value)}
+      onChange={(e) => setSearchPhrase(e.currentTarget.value.toLowerCase())}
       placeholder="Wyszukaj ćwiczenie..."
       value={searchPhrase}
     />

@@ -26,8 +26,18 @@ module.exports = {
         "3/5": "60%",
         "4/5": "80vh",
       },
+      minHeight: {
+        "4/5": "80vh",
+      },
       borderRadius: {
         "4xl": "2rem",
+      },
+      minWidth: {
+        "6xl": "75rem",
+      },
+      flex: {
+        "4/5": "0 0 80vh",
+        "6xl": "0 0 75rem",
       },
     },
   },
