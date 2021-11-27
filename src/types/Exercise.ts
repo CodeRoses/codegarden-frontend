@@ -1,4 +1,4 @@
-export interface Exercise {
+export interface IExercise {
   id: number;
   name: string;
   difficulty: Difficulty;

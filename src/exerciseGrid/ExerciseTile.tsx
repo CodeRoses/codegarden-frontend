@@ -1,11 +1,10 @@
 import React from "react";
-import { IconContext } from "react-icons";
 import { FaCheck } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { Exercise } from "../types/Exercise";
+import { IExercise } from "../types/Exercise";
 
 interface ExerciseProps {
-  exercise: Exercise;
+  exercise: IExercise;
 }
 
 const ExerciseTile: React.FunctionComponent<ExerciseProps> = ({ exercise }) => {
@@ -30,21 +29,16 @@ const ExerciseTile: React.FunctionComponent<ExerciseProps> = ({ exercise }) => {
           <p className="text-center">{exercise.name}</p>
         </div>
         {exercise.completed ? (
-          <IconContext.Provider
-            value={{
-              color: "white",
-              size: "50",
-              className:
-                "bg-green-700 rounded-full p-2 absolute -top-4 -right-4",
-            }}
-          >
-            <FaCheck />
-          </IconContext.Provider>
+          <FaCheck
+            color="white"
+            size="50"
+            className="bg-green-700 rounded-full p-2 absolute -top-4 -right-4"
+          />
         ) : null}
         <div
           className={`bg-diff-${
             DIFFICULTIES[exercise.difficulty].color
-          } bg-no-repeat bg-contain -mb-0.5 mt-auto h-10 flex items-center justify-center`}
+          } bg-no-repeat bg-contain mt-auto h-10 flex items-center justify-center`}
         >
           {DIFFICULTIES[exercise.difficulty].name}
         </div>

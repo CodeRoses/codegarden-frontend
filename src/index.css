@@ -18,8 +18,9 @@ body {
 
 body::before {
   content: " ";
-  background: url(logo.svg);
+  background: url(logo-monochromatic.svg);
   background-position: center;
+  background-size: contain;
   background-repeat: no-repeat;
   position: absolute;
   width: 200px;
