@@ -2,10 +2,10 @@ import React from "react";
 import { IconContext } from "react-icons";
 import { FaCheck } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { Exercise } from "../types/Exercise";
+import { IExercise } from "../types/Exercise";
 
 interface ExerciseProps {
-  exercise: Exercise;
+  exercise: IExercise;
 }
 
 const ExerciseTile: React.FunctionComponent<ExerciseProps> = ({ exercise }) => {
@@ -44,7 +44,7 @@ const ExerciseTile: React.FunctionComponent<ExerciseProps> = ({ exercise }) => {
         <div
           className={`bg-diff-${
             DIFFICULTIES[exercise.difficulty].color
-          } bg-no-repeat bg-contain -mb-0.5 mt-auto h-10 flex items-center justify-center`}
+          } bg-no-repeat bg-contain -mb-1 mt-auto h-10 flex items-center justify-center`}
         >
           {DIFFICULTIES[exercise.difficulty].name}
         </div>
