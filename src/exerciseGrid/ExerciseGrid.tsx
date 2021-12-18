@@ -2,17 +2,11 @@ import React, { useState, useEffect } from "react";
 import ExerciseTile from "./ExerciseTile";
 import SearchBar from "./SearchBar";
 import FilterDropdown from "./FilterDropdown";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { IExercise } from "../types/Exercise";
 
 const ExerciseGrid: React.FunctionComponent = () => {
-  const getExercises = async () => {
-    const test = await axios.get(
-      "https://codegarden-api.azurewebsites.net/exercises"
-    );
-    console.log(test);
-  };
-  const [exercises, setExercise] = useState<IExercise[]>([
+  const [exercises, setExercises] = useState<IExercise[]>([
     {
       id: 1,
       name: "Kociołek Sersi",
@@ -86,10 +80,16 @@ const ExerciseGrid: React.FunctionComponent = () => {
       )
     );
   }, [searchPhrase, difficulty, exercises]);
+  const getExercises = async () => {
+    const response: AxiosResponse<IExercise[]> = await axios.get(
+      "https://codegarden-api.azurewebsites.net/exercise"
+    );
+    setExercises(response.data);
+  };
 
   React.useEffect(() => {
     getExercises();
-  }, []);
+  });
 
   return (
     <div className="h-screen flex flex-col items-center">
