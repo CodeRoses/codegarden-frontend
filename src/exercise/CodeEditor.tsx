@@ -2,17 +2,16 @@ import React from "react";
 import Dragula from "react-dragula";
 import Code from "./Code";
 
-const codePrewritten = `torba_sersi = []
-
-kociolek = ['snickers', 'rodzynki', 'czekolada', 'zelki', 'ciastka']
-
-`;
+const codePrewritten =
+  'balagan_ani = [\n\t{\n\t\t"nazwa": "Barbie",\n\t\t"typ": "Zabawka"\n\t},\n\t{\n\t\t"nazwa": "Harry Potter i Komnata Tajemnic",\n\t\t"typ": "Książka",\n\t\t"kategoria": "Fantasy"\n\t},\n\t{\n\t\t"nazwa": "Transformers",\n\t\t"typ": "Zabawka"\n\t},\n\t{\n\t\t"nazwa": "Niebieska bluza",\n\t\t"typ": "Ubranie"\n\t},\n\t{\n\t\t"nazwa": "Nowe przygody Mikołajka",\n\t\t"typ": "Książka",\n\t\t"kategoria": "Dla dzieci"\n\t},\n\t{\n\t\t"nazwa": "Java. Poradnik dla poczatkujacych",\n\t\t"typ": "Książka",\n\t\t"kategoria": "Naukowe"\n\t},\n\t{\n\t\t"nazwa": "Revenge of Najmanito",\n\t\t"typ": "Zabawka"\n\t},\n\t{\n\t\t"nazwa": "Skarpetki",\n\t\t"typ": "Ubranie"\n\t},\n\t{\n\t\t"nazwa": "Władca pierścieni: Drużyna pierścienia",\n\t\t"typ": "Książka",\n\t\t"kategoria": "Fantasy"\n\t}\n]\n\npojemniki = {\n\t"szafa": [],\n\t"pud�o": [],\n\t"stos_książek": [],\n}\npolka_na_ksiazki = {}';
 
 const codeFragments = [
-  `  if cukierek != 'rodzynki':
-      torba_sersi.push(cukierek)`,
-  `print(f"Sersi ma {len(torba_sersi)} cukierki w swojej torbie!")`,
-  `for cukierek in kociolek:`,
+  "for przedmiot in balagan_ani:",
+  '\tif przedmiot["typ"] == "Książka":\n\t\tpojemniki["stos_książek"].append(przedmiot)',
+  '\telif przedmiot["typ"] == "Ubranie":\n\t\tpojemniki["szafa"].append(przedmiot)\n\telif przedmiot["typ"] == "Zabawka":\n\t\tpojemniki["pudło"].append(przedmiot)',
+  'for ksiazka in pojemniki["stos_książek"]:',
+  '\tif ksiazka["kategoria"] not in polka_na_ksiazki.keys():\n\t\tpolka_na_ksiazki[ksiazka["kategoria"]] = []',
+  '\tpolka_na_ksiazki[ksiazka["kategoria"]].append(ksiazka)\n',
 ];
 
 const CodeEditor: React.FunctionComponent = () => {

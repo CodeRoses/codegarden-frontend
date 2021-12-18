@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
 
 const text = {
-  title: "Cukierek albo psikus!",
+  title: "Pokój Ani",
   flavor:
-    "Pomóż Sersi zebrać halloweenowe słodkości! Ale uważaj - Sersi nie lubi rodzynek.",
-  task: "Przeszukaj elementy w kociołku = jeśli trafisz na coś słodkiego, dodaj to do torby Sersi. Pamiętaj, aby nie zbierać rodzynek!",
+    "W pokoju Ani zrobił się straszny bałagan! Trzeba w takim razie trochę posprzątać. Na podłodze rozrzucone są ubrania, zabawki i książki. Należy schować ubrania i zabawki, a następnie ułożyć książki na półce w odpowiednich przegródkach.",
+  task: "Pomóż Ani odłożyć wszystkie zabawki do pudła i ubrania do szafy. Ania odkłada swoje ksiażki na półkę, porządkując je w przegródkach według kategorii.",
   instructions:
-    "Przeciągnij i ułóż bloki kodu, aby zliczyć słodkosci i wyświetlić zawartość torby Sersi.",
+    "Przeciągnij i ułóż bloki kodu, aby rozłożyć zabawki i ubrania w odpowiednie miejsca, a następnie przyporządkować książki do odpowiednik przegródek na półce.",
 };
 
 const Instructions: React.FunctionComponent = () => {

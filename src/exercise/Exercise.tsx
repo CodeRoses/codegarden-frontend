@@ -4,7 +4,7 @@ import Instructions from "./Instructions";
 
 const Exercise: React.FunctionComponent = () => {
   return (
-    <div className="flex items-center justify-center align-items-center h-screen">
+    <div className="flex items-center justify-center align-items-center">
       <CodeEditor />
       <Instructions />
     </div>

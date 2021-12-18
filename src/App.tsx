@@ -5,6 +5,7 @@ import { FunctionComponent } from "react";
 import Exercise from "./exercise/Exercise";
 import ExerciseGrid from "./exerciseGrid/ExerciseGrid";
 import LoginScreen from "./authentication/LoginScreen";
+import RegistrationScreen from "./authentication/RegistrationScreen";
 
 const Placeholder: FunctionComponent = () => {
   return (
@@ -36,6 +37,7 @@ const App: FunctionComponent = () => {
           <Route path="/" element={<Placeholder />} />
           <Route path="/exercise" element={<Exercise />} />
           <Route path="/exercises" element={<ExerciseGrid />} />
+          <Route path="/registration" element={<RegistrationScreen />} />
           <Route path="/login" element={<LoginScreen />} />
         </Routes>
       </div>
