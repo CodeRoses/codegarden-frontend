@@ -13,9 +13,7 @@ const Login: React.FunctionComponent = () => {
   const login = async () => {
     try {
       setErrorMessage("");
-      const response = await signInWithEmailAndPassword(auth, email, password);
-      const accessToken = await response.user.getIdToken();
-      localStorage.setItem("token", accessToken);
+      await signInWithEmailAndPassword(auth, email, password);
       navigate("/exercises", { replace: true });
     } catch (error) {
       if (error instanceof FirebaseError) {

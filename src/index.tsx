@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import { initializeApp } from "firebase/app";
 import axios from "axios";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: `${process.env.REACT_APP_API_KEY}`,
@@ -16,6 +17,20 @@ const firebaseConfig = {
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
+
+const auth = getAuth();
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+    user.getIdToken().then((token) => localStorage.setItem("token", token));
+    // ...
+  } else {
+    // User is signed out
+    // ...
+    localStorage.removeItem("token");
+  }
+});
 
 axios.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");

@@ -24,9 +24,7 @@ const SocialMediaLogin: React.FunctionComponent<IProps> = ({
 
   const googleLogin = async () => {
     try {
-      const response = await signInWithPopup(auth, googleProvider);
-      const accessToken = await response.user.getIdToken();
-      localStorage.setItem("token", accessToken);
+      await signInWithPopup(auth, googleProvider);
       navigate("/exercises", { replace: true });
     } catch (error) {
       if (error instanceof FirebaseError) {
