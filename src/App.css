@@ -57,13 +57,13 @@
 }
 
 .bg-diff-easy {
-  background-image: url('diff-easy.svg')
+  background-image: url("diff-easy.svg");
 }
 
 .bg-diff-medium {
-  background-image: url('diff-medium.svg')
+  background-image: url("diff-medium.svg");
 }
 
 .bg-diff-hard {
-  background-image: url('diff-hard.svg')
+  background-image: url("diff-hard.svg");
 }

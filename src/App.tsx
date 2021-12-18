@@ -6,6 +6,9 @@ import Exercise from "./exercise/Exercise";
 import ExerciseGrid from "./exerciseGrid/ExerciseGrid";
 import LoginScreen from "./authentication/LoginScreen";
 import RegistrationScreen from "./authentication/RegistrationScreen";
+import Modal from "react-modal";
+
+Modal.setAppElement("#root");
 
 const Placeholder: FunctionComponent = () => {
   return (
