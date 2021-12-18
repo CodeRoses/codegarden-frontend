@@ -1,16 +1,41 @@
-import { FcGoogle } from "react-icons/fc";
-import { AiFillFacebook } from "react-icons/ai";
-import SeparatorWithText from "../SeparatorWithText";
 import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import SocialMediaLogin from "./SocialMediaLogin";
+import { FirebaseError } from "firebase/app";
 
 const Registration: React.FunctionComponent = () => {
   const navigate = useNavigate();
+  const auth = getAuth();
+  const [errorMessage, setErrorMessage] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-  const register = () => {
-    navigate("/exercises", { replace: true });
+  const register = async () => {
+    if (password === password2) {
+      try {
+        await createUserWithEmailAndPassword(auth, email, password);
+        navigate("/exercises", { replace: true });
+      } catch (error) {
+        if (error instanceof FirebaseError) {
+          switch (error.code) {
+            case "auth/invalid-email":
+              setErrorMessage("Wpisz poprawny adres email");
+              break;
+            case "auth/weak-password":
+              setErrorMessage("Hasło musi mieć przynajmniej 6 znaków!");
+              break;
+            case "auth/email-already-in-use":
+              setErrorMessage("Podany email istnieje już w systemie.");
+              break;
+          }
+          console.log(error.code);
+          console.log(error.message);
+        }
+      }
+    } else {
+      setErrorMessage("Hasła muszą być identyczne");
+    }
   };
 
   return (
@@ -65,11 +90,11 @@ const Registration: React.FunctionComponent = () => {
             />
           </div>
         </div>
-        <div>
-          <p className="text-black-600/50 text-xs">
+        <div className="flex justify-center p-2 text-xs">
+          <p>
             {" "}
-            Tworząc konto, zgadzasz się na <a>politykę prywatności</a>
-            oraz <a>warunki korzystania</a> CodeGarden.
+            Tworząc konto, zgadzasz się na <a>politykę prywatności </a>
+            oraz <a> warunki korzystania</a> CodeGarden.
           </p>
         </div>
 
@@ -82,18 +107,10 @@ const Registration: React.FunctionComponent = () => {
             Zarejestruj mnie
           </button>
         </div>
-
-        <div className="flex flex-col text-dim-lilac my-3">
-          <SeparatorWithText
-            textContent="lub zaloguj się przez"
-            className="border-dim-lilac"
-            backgroundColor="bg-gray-300"
-          />
-          <div className="flex flex-row justify-evenly pt-7">
-            <AiFillFacebook color="#4267B2" size={50} />
-            <FcGoogle size={50} />
-          </div>
-        </div>
+        {errorMessage ? (
+          <div className="text-red-600 text-center">{errorMessage}</div>
+        ) : null}
+        <SocialMediaLogin setErrorMessage={setErrorMessage} />
       </div>
     </div>
   );
