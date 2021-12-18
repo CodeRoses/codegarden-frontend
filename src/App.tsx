@@ -16,9 +16,15 @@ const Placeholder: FunctionComponent = () => {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>Witamy w Codegarden. Baw się dobrze.</p>
-        <Link className="App-link" to="/login">
-          Zaloguj się
-        </Link>
+        {localStorage.getItem("token") ? (
+          <Link className="App-link" to="/exercises">
+            Wybierz zadanie
+          </Link>
+        ) : (
+          <Link className="App-link" to="/login">
+            Zaloguj się
+          </Link>
+        )}
       </header>
     </div>
   );

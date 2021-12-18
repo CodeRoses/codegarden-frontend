@@ -1,23 +1,40 @@
-import { FcGoogle } from "react-icons/fc";
-import { AiFillFacebook } from "react-icons/ai";
-import SeparatorWithText from "../SeparatorWithText";
 import { Link, useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
+import SocialMediaLogin from "./SocialMediaLogin";
+import { FirebaseError } from "firebase/app";
 
 const Login: React.FunctionComponent = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const auth = getAuth();
   const login = async () => {
     try {
+      setErrorMessage("");
       const response = await signInWithEmailAndPassword(auth, email, password);
-      await response.user.getIdToken();
+      const accessToken = await response.user.getIdToken();
+      localStorage.setItem("token", accessToken);
       navigate("/exercises", { replace: true });
-    } catch (error: any) {
-      console.log(error.code);
-      console.log(error.message);
+    } catch (error) {
+      if (error instanceof FirebaseError) {
+        switch (error.code) {
+          case "auth/invalid-email":
+            setErrorMessage("Wpisz poprawny adres email");
+            break;
+          case "auth/user-not-found":
+            setErrorMessage(
+              "Nie znaleziono użytkownika o podanym adresie email"
+            );
+            break;
+          case "auth/wrong-password":
+            setErrorMessage("Podane hasło jest nieprawidłowe");
+            break;
+        }
+        console.log(error.code);
+        console.log(error.message);
+      }
     }
   };
   return (
@@ -57,6 +74,9 @@ const Login: React.FunctionComponent = () => {
               placeholder="Hasło"
             />
           </div>
+          {errorMessage ? (
+            <div className="text-red-600">{errorMessage}</div>
+          ) : null}
         </div>
 
         <div className="bg-pink-400 rounded-lg p-2 text-dim-lilac my-5 w-1/2 flex m-auto justify-center">
@@ -69,17 +89,7 @@ const Login: React.FunctionComponent = () => {
           </button>
         </div>
 
-        <div className="flex flex-col text-dim-lilac my-3">
-          <SeparatorWithText
-            textContent="zaloguj się przez"
-            className="border-dim-lilac"
-            backgroundColor="bg-gray-300"
-          />
-          <div className="flex flex-row justify-evenly pt-7">
-            <AiFillFacebook color="#4267B2" size={50} />
-            <FcGoogle size={50} />
-          </div>
-        </div>
+        <SocialMediaLogin setErrorMessage={setErrorMessage} />
       </div>
     </div>
   );
