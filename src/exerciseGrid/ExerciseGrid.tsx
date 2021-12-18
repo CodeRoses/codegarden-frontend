@@ -1,74 +1,79 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import ExerciseTile from "./ExerciseTile";
 import SearchBar from "./SearchBar";
 import FilterDropdown from "./FilterDropdown";
+import axios from "axios";
+import { IExercise } from "../types/Exercise";
 
 const ExerciseGrid: React.FunctionComponent = () => {
-  const exercises = useMemo(
-    () => [
-      {
-        id: 1,
-        name: "Kociołek Sersi",
-        difficulty: 1,
-        completed: true,
-      },
-      {
-        id: 2,
-        name: "Tajemnicze badanie Zeldy",
-        difficulty: 2,
-        completed: false,
-      },
-      {
-        id: 3,
-        name: "Przygoda dziesięciu skarpetek",
-        difficulty: 1,
-        completed: false,
-      },
-      {
-        id: 4,
-        name: "Magiczny podwieczorek",
-        difficulty: 3,
-        completed: false,
-      },
-      {
-        id: 5,
-        name: "Komunikacyjny miszmasz",
-        difficulty: 1,
-        completed: false,
-      },
-      {
-        id: 6,
-        name: "Dziwny świat dorosłych",
-        difficulty: 2,
-        completed: true,
-      },
-      {
-        id: 7,
-        name: "Drzewo genealogiczne",
-        difficulty: 3,
-        completed: false,
-      },
-      {
-        id: 8,
-        name: "Brian Holt i jego lunch",
-        difficulty: 2,
-        completed: true,
-      },
-      {
-        id: 9,
-        name: "Urodziny Peppy",
-        difficulty: 1,
-        completed: false,
-      },
-      {
-        id: 10,
-        name: "Weekendowa podróż Franka",
-        difficulty: 3,
-        completed: false,
-      },
-    ],
-    []
-  );
+  const getExercises = async () => {
+    const test = await axios.get(
+      "https://codegarden-api.azurewebsites.net/exercises"
+    );
+    console.log(test);
+  };
+  const [exercises, setExercise] = useState<IExercise[]>([
+    {
+      id: 1,
+      name: "Kociołek Sersi",
+      difficulty: 1,
+      completed: true,
+    },
+    {
+      id: 2,
+      name: "Tajemnicze badanie Zeldy",
+      difficulty: 2,
+      completed: false,
+    },
+    {
+      id: 3,
+      name: "Przygoda dziesięciu skarpetek",
+      difficulty: 1,
+      completed: false,
+    },
+    {
+      id: 4,
+      name: "Magiczny podwieczorek",
+      difficulty: 3,
+      completed: false,
+    },
+    {
+      id: 5,
+      name: "Komunikacyjny miszmasz",
+      difficulty: 1,
+      completed: false,
+    },
+    {
+      id: 6,
+      name: "Dziwny świat dorosłych",
+      difficulty: 2,
+      completed: true,
+    },
+    {
+      id: 7,
+      name: "Drzewo genealogiczne",
+      difficulty: 3,
+      completed: false,
+    },
+    {
+      id: 8,
+      name: "Brian Holt i jego lunch",
+      difficulty: 2,
+      completed: true,
+    },
+    {
+      id: 9,
+      name: "Urodziny Peppy",
+      difficulty: 1,
+      completed: false,
+    },
+    {
+      id: 10,
+      name: "Weekendowa podróż Franka",
+      difficulty: 3,
+      completed: false,
+    },
+  ]);
   const [searchPhrase, setSearchPhrase] = useState("");
   const [difficulty, setDifficulty] = useState("");
   const [filteredExercises, setFilteredExercises] = useState(exercises);
@@ -81,6 +86,10 @@ const ExerciseGrid: React.FunctionComponent = () => {
       )
     );
   }, [searchPhrase, difficulty, exercises]);
+
+  React.useEffect(() => {
+    getExercises();
+  }, []);
 
   return (
     <div className="h-screen flex flex-col items-center">
