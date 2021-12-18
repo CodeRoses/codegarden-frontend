@@ -1,6 +1,8 @@
 import React from "react";
 import Dragula from "react-dragula";
 import Code from "./Code";
+import NegativeResponseModal from "./NegativeResponseModal";
+import PositiveResponseModal from "./PositiveResponseModal";
 
 const codePrewritten =
   'balagan_ani = [\n\t{\n\t\t"nazwa": "Barbie",\n\t\t"typ": "Zabawka"\n\t},\n\t{\n\t\t"nazwa": "Harry Potter i Komnata Tajemnic",\n\t\t"typ": "Książka",\n\t\t"kategoria": "Fantasy"\n\t},\n\t{\n\t\t"nazwa": "Transformers",\n\t\t"typ": "Zabawka"\n\t},\n\t{\n\t\t"nazwa": "Niebieska bluza",\n\t\t"typ": "Ubranie"\n\t},\n\t{\n\t\t"nazwa": "Nowe przygody Mikołajka",\n\t\t"typ": "Książka",\n\t\t"kategoria": "Dla dzieci"\n\t},\n\t{\n\t\t"nazwa": "Java. Poradnik dla poczatkujacych",\n\t\t"typ": "Książka",\n\t\t"kategoria": "Naukowe"\n\t},\n\t{\n\t\t"nazwa": "Revenge of Najmanito",\n\t\t"typ": "Zabawka"\n\t},\n\t{\n\t\t"nazwa": "Skarpetki",\n\t\t"typ": "Ubranie"\n\t},\n\t{\n\t\t"nazwa": "Władca pierścieni: Drużyna pierścienia",\n\t\t"typ": "Książka",\n\t\t"kategoria": "Fantasy"\n\t}\n]\n\npojemniki = {\n\t"szafa": [],\n\t"pud�o": [],\n\t"stos_książek": [],\n}\npolka_na_ksiazki = {}';
@@ -15,6 +17,15 @@ const codeFragments = [
 ];
 
 const CodeEditor: React.FunctionComponent = () => {
+  const [positiveResponse, setPositiveResponse] = React.useState(false);
+  const [negativeResponse, setNegativeResponse] = React.useState(false);
+
+  const showRandomModal = () => {
+    const random = Math.random();
+    console.log(random > 0.5);
+    return random > 0.5 ? setPositiveResponse(true) : setNegativeResponse(true);
+  };
+
   const dragulaDecorator = React.useRef(
     (componentBackingInstance: HTMLDivElement) => {
       if (componentBackingInstance) {
@@ -36,9 +47,20 @@ const CodeEditor: React.FunctionComponent = () => {
           ))}
         </div>
         <div className="flex justify-center text-white text-2xl mt-10">
-          <button className="bg-red-400 hover:bg-red-500 rounded-full py-2 px-4">
+          <button
+            className="bg-red-400 hover:bg-red-500 rounded-full py-2 px-4"
+            onClick={showRandomModal}
+          >
             Wyślij
           </button>
+          <PositiveResponseModal
+            isOpen={positiveResponse}
+            setIsOpen={setPositiveResponse}
+          />
+          <NegativeResponseModal
+            isOpen={negativeResponse}
+            setIsOpen={setNegativeResponse}
+          />
         </div>
       </div>
     </div>

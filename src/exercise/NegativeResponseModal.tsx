@@ -24,7 +24,7 @@ const style = {
   },
 };
 
-const PositiveResponseModal: React.FunctionComponent<IProps> = ({
+const NegativeResponseModal: React.FunctionComponent<IProps> = ({
   isOpen,
   setIsOpen,
 }) => {
@@ -57,4 +57,4 @@ const PositiveResponseModal: React.FunctionComponent<IProps> = ({
   );
 };
 
-export default PositiveResponseModal;
+export default NegativeResponseModal;
