@@ -9,7 +9,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 console.log("process.env", process.env);
 
 const firebaseConfig = {
-  apiKey: `${process.env.REACT_APP_API_KEY}`,
+  apiKey: "AIzaSyB2K0S5q5t3Lbbssvmj-jxg2tq2NmcfUpo",
   authDomain: "codegarden-55736.firebaseapp.com",
   projectId: "codegarden-55736",
   storageBucket: "codegarden-55736.appspot.com",
