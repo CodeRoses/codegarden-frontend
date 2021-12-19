@@ -21,7 +21,7 @@ const Exercise: React.FunctionComponent = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return exerciseData ? (
-    <div className="flex items-center justify-center align-items-center">
+    <div className="flex items-center justify-center align-items-center min-h-screen">
       <CodeEditor
         codeFragments={exerciseData.codeFragments}
         codePrewritten={exerciseData.codePrewritten}
