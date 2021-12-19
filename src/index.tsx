@@ -5,6 +5,10 @@ import App from "./App";
 import { initializeApp } from "firebase/app";
 import axios from "axios";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import dotenv from "dotenv";
+
+dotenv.config();
+console.log("process.env", process.env);
 
 const firebaseConfig = {
   apiKey: `${process.env.REACT_APP_API_KEY}`,
