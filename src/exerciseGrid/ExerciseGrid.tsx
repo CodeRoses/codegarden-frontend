@@ -3,93 +3,39 @@ import ExerciseTile from "./ExerciseTile";
 import SearchBar from "./SearchBar";
 import FilterDropdown from "./FilterDropdown";
 import axios, { AxiosResponse } from "axios";
-import { IExercise } from "../types/Exercise";
+import { DifficultyFilter, IExercise } from "../types/Exercise";
+import hmmm from "../Hmmm.svg";
 
 const ExerciseGrid: React.FunctionComponent = () => {
-  const [exercises, setExercises] = useState<IExercise[]>([
-    {
-      id: 1,
-      name: "Kociołek Sersi",
-      difficulty: 1,
-      completed: true,
-    },
-    {
-      id: 2,
-      name: "Tajemnicze badanie Zeldy",
-      difficulty: 2,
-      completed: false,
-    },
-    {
-      id: 3,
-      name: "Przygoda dziesięciu skarpetek",
-      difficulty: 1,
-      completed: false,
-    },
-    {
-      id: 4,
-      name: "Magiczny podwieczorek",
-      difficulty: 3,
-      completed: false,
-    },
-    {
-      id: 5,
-      name: "Komunikacyjny miszmasz",
-      difficulty: 1,
-      completed: false,
-    },
-    {
-      id: 6,
-      name: "Dziwny świat dorosłych",
-      difficulty: 2,
-      completed: true,
-    },
-    {
-      id: 7,
-      name: "Drzewo genealogiczne",
-      difficulty: 3,
-      completed: false,
-    },
-    {
-      id: 8,
-      name: "Brian Holt i jego lunch",
-      difficulty: 2,
-      completed: true,
-    },
-    {
-      id: 9,
-      name: "Urodziny Peppy",
-      difficulty: 1,
-      completed: false,
-    },
-    {
-      id: 10,
-      name: "Weekendowa podróż Franka",
-      difficulty: 3,
-      completed: false,
-    },
-  ]);
+  const [exercises, setExercises] = useState<IExercise[]>([]);
   const [searchPhrase, setSearchPhrase] = useState("");
-  const [difficulty, setDifficulty] = useState("");
+  const [difficulty, setDifficulty] = useState(DifficultyFilter.All);
+  const [loading, setLoading] = useState(false);
   const [filteredExercises, setFilteredExercises] = useState(exercises);
   useEffect(() => {
+    console.log(DifficultyFilter.All);
+    console.log(difficulty);
     setFilteredExercises(
       exercises.filter(
         (exercise) =>
-          exercise.name.toLowerCase().includes(searchPhrase) &&
-          (+difficulty === 0 || exercise.difficulty === +difficulty)
+          exercise.title.toLowerCase().includes(searchPhrase) &&
+          (difficulty === DifficultyFilter.All ||
+            exercise.difficulty === difficulty)
       )
     );
   }, [searchPhrase, difficulty, exercises]);
   const getExercises = async () => {
+    setLoading(true);
     const response: AxiosResponse<IExercise[]> = await axios.get(
       "https://codegarden-api.azurewebsites.net/exercise"
     );
     setExercises(response.data);
+    setLoading(false);
   };
 
   React.useEffect(() => {
     getExercises();
-  });
+  }, []);
 
   return (
     <div className="h-screen flex flex-col items-center">
@@ -104,11 +50,20 @@ const ExerciseGrid: React.FunctionComponent = () => {
             setDifficulty={setDifficulty}
           />
         </div>
-        <div className="grid grid-cols-1 py-5 px-6 md:grid-cols-2 xl:grid-cols-3 gap-10 xl:gap-32 self-center md:w-11/12 m-auto overflow-y-auto overflow-x-visible min-h-4/5 max-h-4/5">
-          {filteredExercises.map((exercise) => (
-            <ExerciseTile key={exercise.id} exercise={exercise} />
-          ))}
-        </div>
+        {loading ? (
+          <div className="flex flex-col items-center justify-center min-h-4/5 max-h-4/5">
+            <h1 className="text-4xl text-pink-600 font-bold">
+              Clyde szuka zadań...
+            </h1>
+            <img src={hmmm} className="w-2/5" alt="ok-logo" />
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 py-5 px-6 md:grid-cols-2 xl:grid-cols-3 gap-10 xl:gap-32 self-center md:w-11/12 m-auto overflow-y-auto overflow-x-visible min-h-4/5 max-h-4/5">
+            {filteredExercises.map((exercise) => (
+              <ExerciseTile key={exercise.id} exercise={exercise} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

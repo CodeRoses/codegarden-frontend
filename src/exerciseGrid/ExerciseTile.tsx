@@ -9,24 +9,24 @@ interface ExerciseProps {
 
 const ExerciseTile: React.FunctionComponent<ExerciseProps> = ({ exercise }) => {
   const DIFFICULTIES = {
-    "1": {
+    EASY: {
       name: "Łatwy",
       color: "easy",
     },
-    "2": {
+    MEDIUM: {
       name: "Zaawansowany",
       color: "medium",
     },
-    "3": {
+    HARD: {
       name: "Trudny",
       color: "hard",
     },
   };
   return (
-    <Link to="/exercise">
+    <Link to={`/exercise/${exercise.id}`}>
       <div className="bg-sizzling-red bg-opacity-75 p-10 pb-0 rounded-4xl self-center h-52 relative flex flex-col">
         <div className="bg-light-cyan border-2 text-2xl border-levis-lush-grey border-opacity-70 h-2/3 flex items-center justify-center">
-          <p className="text-center">{exercise.name}</p>
+          <p className="text-center">{exercise.title}</p>
         </div>
         {exercise.completed ? (
           <FaCheck

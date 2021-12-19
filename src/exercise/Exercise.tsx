@@ -1,13 +1,35 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
+import { IExerciseDetails } from "../types/ExerciseDetails";
 import CodeEditor from "./CodeEditor";
 import Instructions from "./Instructions";
 
 const Exercise: React.FunctionComponent = () => {
-  return (
+  const { id } = useParams();
+  const [exerciseData, setExerciseData] = useState<IExerciseDetails>();
+
+  const getExercise = async () => {
+    const response = await axios.get(
+      `https://codegarden-api.azurewebsites.net/exercise/${id}`
+    );
+    setExerciseData(response.data);
+  };
+
+  React.useEffect(() => {
+    getExercise();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return exerciseData ? (
     <div className="flex items-center justify-center align-items-center">
-      <CodeEditor />
-      <Instructions />
+      <CodeEditor
+        codeFragments={exerciseData.codeFragments}
+        codePrewritten={exerciseData.codePrewritten}
+      />
+      <Instructions exerciseInstruction={exerciseData.info} />
     </div>
+  ) : (
+    <div>Loading...</div>
   );
 };
 

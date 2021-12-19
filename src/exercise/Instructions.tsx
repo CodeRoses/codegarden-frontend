@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
+import { IExerciseInstructions } from "../types/ExerciseDetails";
 
-const text = {
-  title: "Pokój Ani",
-  flavor:
-    "W pokoju Ani zrobił się straszny bałagan! Trzeba w takim razie trochę posprzątać. Na podłodze rozrzucone są ubrania, zabawki i książki. Należy schować ubrania i zabawki, a następnie ułożyć książki na półce w odpowiednich przegródkach.",
-  task: "Pomóż Ani odłożyć wszystkie zabawki do pudła i ubrania do szafy. Ania odkłada swoje ksiażki na półkę, porządkując je w przegródkach według kategorii.",
-  instructions:
-    "Przeciągnij i ułóż bloki kodu, aby rozłożyć zabawki i ubrania w odpowiednie miejsca, a następnie przyporządkować książki do odpowiednik przegródek na półce.",
-};
+interface IProps {
+  exerciseInstruction: IExerciseInstructions;
+}
 
-const Instructions: React.FunctionComponent = () => {
+const Instructions: React.FunctionComponent<IProps> = ({
+  exerciseInstruction,
+}) => {
   const [hidden, setHidden] = useState(false);
   const toggleHidden = () => setHidden(!hidden);
   return (
@@ -27,12 +25,12 @@ const Instructions: React.FunctionComponent = () => {
         {hidden ? <FaArrowCircleLeft /> : <FaArrowCircleRight />}
       </button>
       <div className="text-white text-lg bg-red-400 mb-5 py-5 text-center">
-        {text.title}
+        {exerciseInstruction.title}
       </div>
       <div className="flex flex-col bg-black bg-opacity-50 py-7 px-5 text-right">
-        <div className="text-white mb-7">{text.flavor}</div>
-        <div className="text-red-400 mb-7">{text.task}</div>
-        <div className="text-green-300">{text.instructions}</div>
+        <div className="text-white mb-7">{exerciseInstruction.flavor}</div>
+        <div className="text-red-400 mb-7">{exerciseInstruction.task}</div>
+        <div className="text-green-300">{exerciseInstruction.instructions}</div>
       </div>
     </div>
   );
