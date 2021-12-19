@@ -1,21 +1,27 @@
 import React from "react";
 import Dragula from "react-dragula";
 import Code from "./Code";
+import NegativeResponseModal from "./NegativeResponseModal";
+import PositiveResponseModal from "./PositiveResponseModal";
 
-const codePrewritten = `torba_sersi = []
+interface IProps {
+  codePrewritten: string;
+  codeFragments: string[];
+}
 
-kociolek = ['snickers', 'rodzynki', 'czekolada', 'zelki', 'ciastka']
+const CodeEditor: React.FunctionComponent<IProps> = ({
+  codeFragments,
+  codePrewritten,
+}) => {
+  const [positiveResponse, setPositiveResponse] = React.useState(false);
+  const [negativeResponse, setNegativeResponse] = React.useState(false);
 
-`;
+  const showRandomModal = () => {
+    const random = Math.random();
+    console.log(random > 0.5);
+    return random > 0.5 ? setPositiveResponse(true) : setNegativeResponse(true);
+  };
 
-const codeFragments = [
-  `  if cukierek != 'rodzynki':
-      torba_sersi.push(cukierek)`,
-  `print(f"Sersi ma {len(torba_sersi)} cukierki w swojej torbie!")`,
-  `for cukierek in kociolek:`,
-];
-
-const CodeEditor: React.FunctionComponent = () => {
   const dragulaDecorator = React.useRef(
     (componentBackingInstance: HTMLDivElement) => {
       if (componentBackingInstance) {
@@ -37,9 +43,20 @@ const CodeEditor: React.FunctionComponent = () => {
           ))}
         </div>
         <div className="flex justify-center text-white text-2xl mt-10">
-          <button className="bg-red-400 hover:bg-red-500 rounded-full py-2 px-4">
+          <button
+            className="bg-red-400 hover:bg-red-500 rounded-full py-2 px-4"
+            onClick={showRandomModal}
+          >
             Wyślij
           </button>
+          <PositiveResponseModal
+            isOpen={positiveResponse}
+            setIsOpen={setPositiveResponse}
+          />
+          <NegativeResponseModal
+            isOpen={negativeResponse}
+            setIsOpen={setNegativeResponse}
+          />
         </div>
       </div>
     </div>

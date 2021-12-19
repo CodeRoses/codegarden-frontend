@@ -10,12 +10,18 @@ module.exports = {
         "light-cyan": "#7ac7c4",
         "levis-lush-grey": "#393737",
         "dim-lilac": "#546280",
+        "success-green": "#2DBB44",
+        "failure-red": "#ED2626",
+        "failure-grey": "#E7E7E7",
+        "failure-green": "#C1F6B8",
       }),
       borderColor: (theme) => ({
         ...theme("colors"),
         DEFAULT: theme("colors.gray.300", "currentColor"),
         "levis-lush-grey": "#393737",
         "dim-lilac": "#546280",
+        "success-green": "#2DBB44",
+        "failure-red": "#ED2626",
       }),
       textColor: (theme) => ({
         ...theme("colors"),
@@ -44,6 +50,9 @@ module.exports = {
       flex: {
         "4/5": "0 0 80vh",
         "6xl": "0 0 75rem",
+      },
+      boxShadow: {
+        dense: "0px 4px 4px rgba(0, 0, 0, 0.25)",
       },
     },
   },

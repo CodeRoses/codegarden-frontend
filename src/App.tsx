@@ -5,6 +5,10 @@ import { FunctionComponent } from "react";
 import Exercise from "./exercise/Exercise";
 import ExerciseGrid from "./exerciseGrid/ExerciseGrid";
 import LoginScreen from "./authentication/LoginScreen";
+import RegistrationScreen from "./authentication/RegistrationScreen";
+import Modal from "react-modal";
+
+Modal.setAppElement("#root");
 
 const Placeholder: FunctionComponent = () => {
   return (
@@ -12,9 +16,15 @@ const Placeholder: FunctionComponent = () => {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>Witamy w Codegarden. Baw się dobrze.</p>
-        <Link className="App-link" to="/login">
-          Zaloguj się
-        </Link>
+        {localStorage.getItem("token") ? (
+          <Link className="App-link" to="/exercises">
+            Wybierz zadanie
+          </Link>
+        ) : (
+          <Link className="App-link" to="/login">
+            Zaloguj się
+          </Link>
+        )}
       </header>
     </div>
   );
@@ -34,8 +44,9 @@ const App: FunctionComponent = () => {
         </nav>
         <Routes>
           <Route path="/" element={<Placeholder />} />
-          <Route path="/exercise" element={<Exercise />} />
+          <Route path="/exercise/:id" element={<Exercise />} />
           <Route path="/exercises" element={<ExerciseGrid />} />
+          <Route path="/registration" element={<RegistrationScreen />} />
           <Route path="/login" element={<LoginScreen />} />
         </Routes>
       </div>

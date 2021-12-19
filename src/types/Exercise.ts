@@ -1,12 +1,15 @@
 export interface IExercise {
   id: number;
-  name: string;
+  title: string;
   difficulty: Difficulty;
   completed: boolean;
 }
 
-export enum Difficulty {
-  EASY = 1,
-  MEDIUM = 2,
-  HARD = 3,
+export type Difficulty = "EASY" | "MEDIUM" | "HARD";
+
+export enum DifficultyFilter {
+  All = "ALL",
+  Easy = "EASY",
+  Medium = "MEDIUM",
+  Hard = "HARD",
 }

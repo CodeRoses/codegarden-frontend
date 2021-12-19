@@ -1,12 +1,39 @@
-import { FcGoogle } from "react-icons/fc";
-import { AiFillFacebook } from "react-icons/ai";
-import SeparatorWithText from "../SeparatorWithText";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useState } from "react";
+import SocialMediaLogin from "./SocialMediaLogin";
+import { FirebaseError } from "firebase/app";
 
 const Login: React.FunctionComponent = () => {
   const navigate = useNavigate();
-  const login = () => {
-    navigate("/exercises", { replace: true });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const auth = getAuth();
+  const login = async () => {
+    try {
+      setErrorMessage("");
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate("/exercises", { replace: true });
+    } catch (error) {
+      if (error instanceof FirebaseError) {
+        switch (error.code) {
+          case "auth/invalid-email":
+            setErrorMessage("Wpisz poprawny adres email");
+            break;
+          case "auth/user-not-found":
+            setErrorMessage(
+              "Nie znaleziono użytkownika o podanym adresie email"
+            );
+            break;
+          case "auth/wrong-password":
+            setErrorMessage("Podane hasło jest nieprawidłowe");
+            break;
+        }
+        console.log(error.code);
+        console.log(error.message);
+      }
+    }
   };
   return (
     <div className="bg-gray-300 flex max-w-4xl flex-col rounded-lg border-l-4 border-pink-400 items-center w-1/4 m-auto">
@@ -14,12 +41,9 @@ const Login: React.FunctionComponent = () => {
         <p className="text-5xl font-normal text-center">Zaloguj się</p>
         <div className="flex justify-end p-2">
           <p>nie masz konta?</p>
-          <a
-            href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-            className="text-pink-400 ml-1"
-          >
+          <Link to="/registration" className="text-pink-400 ml-1">
             Zarejestruj się
-          </a>
+          </Link>
         </div>
 
         <div className="flex flex-col items-center px-10">
@@ -31,7 +55,8 @@ const Login: React.FunctionComponent = () => {
               name="email"
               className="mb-3 rounded-lg p-2 w-full"
               type="text"
-              //   onChange={(e) => setSearchPhrase(e.currentTarget.value.toLowerCase())}
+              value={email}
+              onChange={(e) => setEmail(e.currentTarget.value)}
             />
           </div>
           <div className="flex flex-col items-center w-full">
@@ -42,10 +67,14 @@ const Login: React.FunctionComponent = () => {
               name="password"
               className="rounded-lg p-2 w-full"
               type="password"
-              //   onChange={(e) => setSearchPhrase(e.currentTarget.value.toLowerCase())}
+              value={password}
+              onChange={(e) => setPassword(e.currentTarget.value)}
               placeholder="Hasło"
             />
           </div>
+          {errorMessage ? (
+            <div className="text-red-600">{errorMessage}</div>
+          ) : null}
         </div>
 
         <div className="bg-pink-400 rounded-lg p-2 text-dim-lilac my-5 w-1/2 flex m-auto justify-center">
@@ -58,17 +87,7 @@ const Login: React.FunctionComponent = () => {
           </button>
         </div>
 
-        <div className="flex flex-col text-dim-lilac my-3">
-          <SeparatorWithText
-            textContent="zaloguj się przez"
-            className="border-dim-lilac"
-            backgroundColor="bg-gray-300"
-          />
-          <div className="flex flex-row justify-evenly pt-7">
-            <AiFillFacebook color="#4267B2" size={50} />
-            <FcGoogle size={50} />
-          </div>
-        </div>
+        <SocialMediaLogin setErrorMessage={setErrorMessage} />
       </div>
     </div>
   );

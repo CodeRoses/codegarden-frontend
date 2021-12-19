@@ -1,8 +1,9 @@
 import React from "react";
+import { DifficultyFilter } from "../types/Exercise";
 
 interface FilterProps {
   difficulty: string;
-  setDifficulty: (_: string) => void;
+  setDifficulty: (_: DifficultyFilter) => void;
 }
 
 const FilterDropdown: React.FunctionComponent<FilterProps> = ({
@@ -13,12 +14,12 @@ const FilterDropdown: React.FunctionComponent<FilterProps> = ({
     <select
       className="m-3 rounded-lg p-2 mr-6"
       value={difficulty}
-      onChange={(e) => setDifficulty(e.currentTarget.value)}
+      onChange={(e) => setDifficulty(e.currentTarget.value as DifficultyFilter)}
     >
-      <option value="0">Wszystkie</option>
-      <option value="1">Łatwy</option>
-      <option value="2">Zaawansowany</option>
-      <option value="3">Trudny</option>
+      <option value={DifficultyFilter.All}>Wszystkie</option>
+      <option value={DifficultyFilter.Easy}>Łatwy</option>
+      <option value={DifficultyFilter.Medium}>Zaawansowany</option>
+      <option value={DifficultyFilter.Hard}>Trudny</option>
     </select>
   );
 };
