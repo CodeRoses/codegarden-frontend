@@ -4,15 +4,18 @@ import Code from "./Code";
 import NegativeResponseModal from "./NegativeResponseModal";
 import PositiveResponseModal from "./PositiveResponseModal";
 import $ from "jquery";
+import axios, { AxiosResponse } from "axios";
 
 interface IProps {
   codePrewritten: string;
   codeFragments: string[];
+  taskId: string;
 }
 
 const CodeEditor: React.FunctionComponent<IProps> = ({
   codeFragments,
   codePrewritten,
+  taskId,
 }) => {
   const [positiveResponse, setPositiveResponse] = React.useState(false);
   const [negativeResponse, setNegativeResponse] = React.useState(false);
@@ -26,11 +29,15 @@ const CodeEditor: React.FunctionComponent<IProps> = ({
       .join("\n");
   };
 
-  const showRandomModal = () => {
-    console.log(getOrder());
-    const random = Math.random();
-    console.log(random > 0.5);
-    return random > 0.5 ? setPositiveResponse(true) : setNegativeResponse(true);
+  const showModal = async () => {
+    const res: AxiosResponse<boolean> = await axios.post(
+      `https://codegarden-api.azurewebsites.net/exercise/${taskId}/done`,
+      {
+        result: getOrder(),
+      }
+    );
+    console.log(res.data);
+    return res.data ? setPositiveResponse(true) : setNegativeResponse(true);
   };
 
   const dragulaDecorator = React.useRef(
@@ -64,7 +71,7 @@ const CodeEditor: React.FunctionComponent<IProps> = ({
         <div className="flex justify-center text-white text-2xl mt-10">
           <button
             className="bg-red-400 hover:bg-red-500 rounded-full py-2 px-4"
-            onClick={showRandomModal}
+            onClick={showModal}
           >
             Wyślij
           </button>
