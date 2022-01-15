@@ -3,6 +3,7 @@ import Dragula from "react-dragula";
 import Code from "./Code";
 import NegativeResponseModal from "./NegativeResponseModal";
 import PositiveResponseModal from "./PositiveResponseModal";
+import $ from "jquery";
 
 interface IProps {
   codePrewritten: string;
@@ -16,7 +17,17 @@ const CodeEditor: React.FunctionComponent<IProps> = ({
   const [positiveResponse, setPositiveResponse] = React.useState(false);
   const [negativeResponse, setNegativeResponse] = React.useState(false);
 
+  const getOrder = () => {
+    return $(".code-fragment")
+      .map(function () {
+        return $(this).attr("id");
+      })
+      .get()
+      .join("\n");
+  };
+
   const showRandomModal = () => {
+    console.log(getOrder());
     const random = Math.random();
     console.log(random > 0.5);
     return random > 0.5 ? setPositiveResponse(true) : setNegativeResponse(true);
@@ -26,10 +37,14 @@ const CodeEditor: React.FunctionComponent<IProps> = ({
     (componentBackingInstance: HTMLDivElement) => {
       if (componentBackingInstance) {
         const options = {};
-        Dragula([componentBackingInstance], options);
+        return Dragula([componentBackingInstance], options);
       }
     }
   );
+
+  React.useEffect(() => {
+    console.log(getOrder());
+  }, []);
 
   return (
     <div className="bg-black p-10 bg-opacity-50 rounded-lg self-center">
@@ -37,7 +52,11 @@ const CodeEditor: React.FunctionComponent<IProps> = ({
         <Code code={codePrewritten} />
         <div className="container" ref={dragulaDecorator.current}>
           {codeFragments.map((fragment, index) => (
-            <div className="border-t border-gray-700" key={index}>
+            <div
+              className="border-t border-gray-700 code-fragment"
+              key={index}
+              id={`${fragment}`}
+            >
               <Code code={fragment} />
             </div>
           ))}
