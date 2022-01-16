@@ -25,7 +25,7 @@ const Exercise: React.FunctionComponent = () => {
       <CodeEditor
         codeFragments={exerciseData.codeFragments}
         codePrewritten={exerciseData.codePrewritten}
-        taskId={id!}
+        taskId={id || "1"}
       />
       <Instructions exerciseInstruction={exerciseData.info} />
     </div>
